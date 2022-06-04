@@ -1,0 +1,63 @@
+# Delete n nodes after m nodes from a linked list
+class Node:
+    def __init__(self, value) -> None:
+        self.next = None
+        self.value = value
+
+
+class LinkedList:
+    def __init__(self) -> None:
+        self.head = None
+
+    def add(self, value):
+        node = Node(value)
+        if self.head is None:
+            self.head = node
+            return
+
+        nNode = self.head
+        while nNode.next:
+            nNode = nNode.next
+        nNode.next = node
+
+    def printLinkedList(self) -> None:
+        node = self.head
+        while node is not None:
+            print(f"{node.value}",end=" ")
+            node = node.next
+        print()
+
+    def retainMandDeleteN(self, m, n):
+        x = 0
+        print(f"M = {m} and N = {n}")
+        
+        node = self.head
+        prev = self.head
+        while node is not None:
+            x += 1
+
+            if x == m:
+                for i in range(n):
+                    if node.next is not None:
+                        node = node.next
+                    prev.next = node.next
+                x = 0
+
+            prev = prev.next
+            node = node.next
+        print()
+
+
+linkedList = LinkedList()
+linkedList.add("1")
+linkedList.add("2")
+linkedList.add("3")
+linkedList.add("4")
+linkedList.add("5")
+linkedList.add("6")
+linkedList.add("7")
+linkedList.add("8")
+linkedList.printLinkedList() 
+linkedList.retainMandDeleteN(m=3, n=1) 
+linkedList.printLinkedList() 
+
